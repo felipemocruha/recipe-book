@@ -4,12 +4,13 @@ import re
 import sys
 
 
-idict = {
-    ':farinha': 'Farinha de trigo',
-    ':agua': 'Água',
-    ':sal': 'Sal',
-    ':fermento': 'de Fermento biológico'
-}
+def get_ing_dict():
+    return {
+        ':farinha': 'Farinha de trigo',
+        ':agua': 'Água',
+        ':sal': 'Sal',
+        ':fermento': 'de Fermento biológico'
+    }
 
 
 def parse_ingredients(args):
@@ -30,8 +31,8 @@ def find_keywords(doc):
     return list(re.finditer('::[^ -]+', doc)), doc
 
 
-def parse_keyword(kw):
-    return 'de ' + idict.get(kw[0])
+def parse_keyword(ing_dict, kw):
+    return 'de ' + ing_dict.get(kw[0])
 
 
 def make_dict(args):
@@ -42,11 +43,16 @@ def make_dict(args):
     }
 
 
+def parse_recipe(recipe):
+    return pipe(doc, find_keywords, parse_keywords,
+                parse_ingredients, make_dict)
+
+
 measure = Word('.'+ nums)
 unity = oneOf('mg g ml l')
 quant = Combine(measure + ' ' + unity)
 ingredient = Word(':_' + alphas)
-ingredient.setParseAction(parse_keyword)
+ingredient.setParseAction(partial(parse_keyword, get_ing_dict()))
 item = Combine(quant + ' ' + ingredient)
 
 
@@ -54,6 +60,5 @@ if __name__ == '__main__':
     with open(sys.argv[1]) as f:
         doc = f.read()
 
-    result = pipe(doc, find_keywords, parse_keywords,
-                  parse_ingredients, make_dict)
+    result = parse_recipe(doc)
     print(result)
