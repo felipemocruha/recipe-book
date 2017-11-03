@@ -1,7 +1,6 @@
-::title pizza
-::ingredients
-- 500 g :farinha
-- 300 g :agua
-- 10 g :sal
-- 7.5 g :fermento
-::description dskjfksdjfkjskfjksdjfksldfksdjfklsjdkflxkdflxkdgklxdkfjxkdjfkljxdfkxdfxjdfkjxkfjxkdjfkxjdlfjxkldjflkxjkfxdkljfklxjkfljxkdjfkxjdfkxdkfjxlkjflkxjdkfjx
+:title pizza
+:ingredients [(500 :g :farinha)
+			 (325 :ml :agua)
+			 (7.5 :g :fermento)
+			 (12.5 :g :sal)]
+:description "Misturar todos os ingredientes, sovar e deixar crescer."

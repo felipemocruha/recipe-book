@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Recipe Book</title>
+	<link rel="shortcut icon" href="/static/media/favicon.ico">
+	<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+	<script>
+	</script>
+  </head>
+  <body>
+	<noscript>
+	  You need to enable JavaScript to run this app.
+	</noscript>
+	<div id="root"></div>
+	{% if debug %}
+	<script src="http://localhost:8090/webpack-dev-server.js"></script>
+	<script type="text/javascript" src="http://localhost:8090/assets/vendors.js"></script>
+	<script type="text/javascript" src="http://localhost:8090/assets/index.bundle.js"></script>
+	{% else %}
+	<script type="text/javascript" src="/static/build/vendors.js"></script>
+	<script type="text/javascript" src="/static/build/index.bundle.js"></script>
+	{% endif %}
+  </body>
+  </html>
